@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slot Game</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #1a1a1a;
+        /* background-color: #ffffff; */
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      #gameCanvas {
+        border: 2px solid #333;
+        margin: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+      .main-spin-button {
+        padding: 15px 30px;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        margin-top: 20px;
+        font-weight: bold;
+        box-shadow: 0 4px 0 #c0392b;
+        transition: all 0.2s;
+      }
+      .main-spin-button:hover {
+        background-color: #c0392b;
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 #a53125;
+      }
+      .main-spin-button:active {
+        transform: translateY(4px);
+        box-shadow: none;
+      }
+      .main-spin-button:disabled {
+        background-color: #7f8c8d;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: 0 4px 0 #95a5a6;
+      }
+      
+      /* Base styles for all UI panels */
+      .ui-panel {
+        position: absolute;
+        background-color: #00000050;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        width: 250px;
+        backdrop-filter: blur(5px);
+      }
+      
+      /* Force Tool - Top Left */
+      .force-tool-panel {
+        top: 20px;
+        left: 20px;
+      }
+      
+      /* Bet & Buy Feature - Bottom Left */
+      .bet-panel {
+        bottom: 20px;
+        left: 20px;
+      }
+      
+      /* Spin Controls - Bottom Right */
+      .spin-panel {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .ui-panel h3 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        color: #ecf0f1;
+        border-bottom: 2px solid #34495e;
+        padding-bottom: 10px;
+        text-align: center;
+      }
+      .tool-section {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #34495e;
+      }
+      .tool-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+      .section-label {
+        font-size: 14px;
+        color: #ffffff;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+      .ui-panel select {
+        width: 100%;
+        padding: 10px;
+        background-color: #34495e;
+        color: white;
+        border: 1px solid #7f8c8d;
+        border-radius: 4px;
+        font-family: Arial, sans-serif;
+        cursor: pointer;
+        margin-bottom: 8px;
+      }
+      .ui-panel select:focus {
+        outline: none;
+        border-color: #3498db;
+      }
+      .ui-panel button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        transition: all 0.2s;
+      }
+      .auto-spin-button {
+        background-color: #27ae60;
+        color: white;
+      }
+      .auto-spin-button:hover {
+        background-color: #229954;
+      }
+      .auto-spin-button:disabled {
+        background-color: #7f8c8d;
+        cursor: not-allowed;
+      }
+      .stop-auto-button {
+        background-color: #e67e22;
+        color: white;
+      }
+      .stop-auto-button:hover {
+        background-color: #d35400;
+      }
+      .stop-auto-button:disabled {
+        background-color: #7f8c8d;
+        cursor: not-allowed;
+      }
+      .buy-feature-button {
+        background-color: #8e44ad;
+        color: white;
+      }
+      .buy-feature-button:hover {
+        background-color: #7d3c98;
+      }
+      .checkbox-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .checkbox-container input[type="checkbox"] {
+        margin-right: 8px;
+        transform: scale(1.2);
+      }
+      .checkbox-container label {
+        color: #ecf0f1;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .status-display {
+        font-size: 12px;
+        text-align: center;
+        padding: 8px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        background-color: #34495e;
+        border: 1px solid #7f8c8d;
+      }
+      .status-ready {
+        color: #ffffff;
+      }
+      .status-active {
+        color: #2ecc71;
+      }
+      .status-processing {
+        color: #f39c12;
+      }
+      .status-error {
+        color: #e74c3c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="gameCanvas"></div>
+    </div>
+
+    <!-- Force Tool - Top Left -->
+    <div class="ui-panel force-tool-panel">
+      <h3>Force Tool</h3>
+      <div class="tool-section">
+        <select id="forceToolDropdown">
+          <option value="none">None (Random)</option>
+          <option value="trigger3Scatters">Force 3 Scatters</option>
+          <option value="trigger4Scatters">Force 4 Scatters</option>
+          <option value="trigger5Scatters">Force 5 Scatters</option>
+          <option value="triggerWild">Force Wild</option>
+          <option value="triggerBigWin">Force Big Win</option>
+          <option value="triggerHugeWin">Force Huge Win</option>
+          <option value="triggerMegaWin">Force Mega Win</option>
+        </select>
+        <div id="forceToolStatus" class="status-display status-ready">
+          Ready (Random)
+        </div>
+      </div>
+    </div>
+
+    <!-- Bet & Buy Feature - Bottom Left -->
+    <div class="ui-panel bet-panel">
+      <h3>Betting</h3>
+      <div class="tool-section">
+        <div class="section-label">Bet Amount</div>
+        <select id="betAmountDropdown">
+          <option value="1">$1</option>
+          <option value="2">$2</option>
+          <option value="5">$5</option>
+          <option value="10">$10</option>
+          <option value="20">$20</option>
+          <option value="50">$50</option>
+          <option value="100">$100</option>
+        </select>
+        <div id="betAmountStatus" class="status-display">Bet: $1</div>
+      </div>
+
+      <div class="tool-section">
+        <div class="section-label">Feature Purchase</div>
+        <button id="buyFeatureButton" class="buy-feature-button">Buy Feature ($125)</button>
+      </div>
+    </div>
+
+    <!-- Spin Controls - Bottom Right -->
+    <div class="ui-panel spin-panel">
+      <h3>Spin Controls</h3>
+      <div class="tool-section">
+        <div class="section-label">Normal Spin</div>
+        <button id="spinButton" class="main-spin-button">SPIN</button>
+      </div>
+
+      <div class="tool-section">
+        <div class="section-label">Auto Spin</div>
+        <button id="autoSpinButton" class="auto-spin-button">AUTO SPIN</button>
+        <button id="stopAutoSpinButton" class="stop-auto-button" disabled>
+          STOP AUTO
+        </button>
+
+        <div class="checkbox-container">
+          <input type="checkbox" id="stopOnFreeSpinsCheckbox" />
+          <label for="stopOnFreeSpinsCheckbox">Stop on Free Spins</label>
+        </div>
+
+        <div id="autoSpinStatus" class="status-display status-ready">
+          Auto Spin Ready
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/pixi.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="/js/game.js"></script>
+  </body>
+</html>
