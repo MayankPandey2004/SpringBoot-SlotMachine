@@ -1,8 +1,8 @@
-Iteration: 600M
-Total Bets: 1200.0M
-Base RTP: 54.764%
-Free RTP: 41.301%
-Total RTP: 96.064%
-Odds: 257.228
-Avg per free play: 106.237
-Balance: 1952772941.5
+Iteration: 700M
+Total Bets: 1400.0M
+Base RTP: 54.754%
+Free RTP: 41.312%
+Total RTP: 96.066%
+Odds: 257.305
+Avg per free play: 106.299
+Balance: 1944926856

@@ -16,6 +16,7 @@ public class RTPCalculator {
         this.numberOfSpins = numberOfSpins;
     }
 
+    @SuppressWarnings("CallToPrintStackTrace")
     public void calculate() {
         double totalBets = 0;
 
