@@ -80,7 +80,7 @@ public class CalculateWinning {
 
                 if (countWC == 3) {
                     totalWinning += Math.max(reward, MathData.scores.get("WC")[2] * betAmount);
-                    tempMatrix[2] = Math.max(reward, MathData.scores.get("WC")[2] * betAmount) * mult;
+                    tempMatrix[2] = Math.max(reward, MathData.scores.get("WC")[2] * betAmount);
                 } else {
                     totalWinning += reward;
                 }              
