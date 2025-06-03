@@ -32,6 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 
-MataData.java
+/src/main/java/com/example/demo/logic/MataData.java
 
-RTPCalculator.java
+/src/main/java/com/example/demo/logic/RTPCalculator.java
