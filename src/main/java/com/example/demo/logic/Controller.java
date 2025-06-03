@@ -35,8 +35,8 @@ public class Controller {
                 MathData.totalFreePlayTriggers++;
             }
             default -> {
-                return;
             }
+
         }
     }
 }
