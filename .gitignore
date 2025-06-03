@@ -33,4 +33,3 @@ build/
 .vscode/
 
 /src/main/java/com/example/demo/logic/MataData.java
-/src/main/java/com/example/demo/logic/RTPCalculator.java
