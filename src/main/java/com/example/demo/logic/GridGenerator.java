@@ -39,7 +39,8 @@ public class GridGenerator {
             for (int i = 0; i < rows; i++) {
                 grid[i][j] = java.util.Arrays.asList(MathData.character)
                         .indexOf(currentReel[(index + i) % currentReel.length][j]);
-                if (grid[i][j]==12) countBN++;
+                if (grid[i][j] == 12)
+                    countBN++;
             }
 
         }
@@ -57,16 +58,14 @@ public class GridGenerator {
         // MathData.iteration++;
         // }
 
-
         // System.out.println("Slot Grid:");
         // for (int i = 0; i < rows; i++) {
-        //     for (int j = 0; j < cols; j++) {
-        //         System.out.print(MathData.character[grid[i][j]] + " ");
-        //     }
-        //     System.out.println();
+        // for (int j = 0; j < cols; j++) {
+        // System.out.print(MathData.character[grid[i][j]] + " ");
         // }
         // System.out.println();
-
+        // }
+        // System.out.println();
 
         return grid;
     }

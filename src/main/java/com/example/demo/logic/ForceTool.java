@@ -24,8 +24,8 @@ public class ForceTool {
     }
 
     @SuppressWarnings("unchecked")
-    public static void initialize(Map<String, Object> body){
-        Map<String, Boolean> forceMap = (Map<String, Boolean>)body.get("forceTool");
+    public static void initialize(Map<String, Object> body) {
+        Map<String, Boolean> forceMap = (Map<String, Boolean>) body.get("forceTool");
         trigger3Scatters = forceMap.get("trigger3Scatters");
         trigger4Scatters = forceMap.get("trigger4Scatters");
         trigger5Scatters = forceMap.get("trigger5Scatters");

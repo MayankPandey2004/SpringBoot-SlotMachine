@@ -11,10 +11,10 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		// SpringApplication.run(DemoApplication.class, args);
-		
+
 		int numberOfSpins = 1_000_000_000;
-        RTPCalculator rtpCalculator = new RTPCalculator(MathData.betAmount, numberOfSpins);
-        rtpCalculator.calculate();
+		RTPCalculator rtpCalculator = new RTPCalculator(MathData.betAmount, numberOfSpins);
+		rtpCalculator.calculate();
 	}
 
 }

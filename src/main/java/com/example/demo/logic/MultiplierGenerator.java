@@ -3,7 +3,7 @@ package com.example.demo.logic;
 public class MultiplierGenerator {
     public static int[][] initializeMultiplier(int[][] grid, boolean freeSpin) {
 
-        int [][] multiplier = new int[3][5];
+        int[][] multiplier = new int[3][5];
 
         // Process all WC symbols
         for (int i = 0; i < 3; i++) {
@@ -25,13 +25,14 @@ public class MultiplierGenerator {
                     }
 
                     // FREE SPIN LOGIC
-                    
+
                     if (freeSpin) {
-                        
+
                         // Top-left to bottom-right
                         int x = i - 1, y = j - 1;
                         while (x >= 0 && y >= 0) {
-                            if (!MathData.character[grid[x][y]].equals("WC") && !MathData.character[grid[x][y]].equals("")) {
+                            if (!MathData.character[grid[x][y]].equals("WC")
+                                    && !MathData.character[grid[x][y]].equals("")) {
                                 multiplier[x][y] += 2;
                             }
                             x--;
@@ -41,7 +42,8 @@ public class MultiplierGenerator {
                         x = i + 1;
                         y = j + 1;
                         while (x < 3 && y < 5) {
-                            if (!MathData.character[grid[x][y]].equals("WC") && !MathData.character[grid[x][y]].equals("")) {
+                            if (!MathData.character[grid[x][y]].equals("WC")
+                                    && !MathData.character[grid[x][y]].equals("")) {
                                 multiplier[x][y] += 2;
                             }
                             x++;
@@ -52,7 +54,8 @@ public class MultiplierGenerator {
                         x = i - 1;
                         y = j + 1;
                         while (x >= 0 && y < 5) {
-                            if (!MathData.character[grid[x][y]].equals("WC") && !MathData.character[grid[x][y]].equals("")) {
+                            if (!MathData.character[grid[x][y]].equals("WC")
+                                    && !MathData.character[grid[x][y]].equals("")) {
                                 multiplier[x][y] += 2;
                             }
                             x--;
@@ -62,7 +65,8 @@ public class MultiplierGenerator {
                         x = i + 1;
                         y = j - 1;
                         while (x < 3 && y >= 0) {
-                            if (!MathData.character[grid[x][y]].equals("WC") && !MathData.character[grid[x][y]].equals("")) {
+                            if (!MathData.character[grid[x][y]].equals("WC")
+                                    && !MathData.character[grid[x][y]].equals("")) {
                                 multiplier[x][y] += 2;
                             }
                             x++;
@@ -75,10 +79,10 @@ public class MultiplierGenerator {
 
         // System.out.println("Multiplier Grid:");
         // for (int i = 0; i < 3; i++) {
-        //     for (int j = 0; j < 5; j++) {
-        //         System.out.print(multiplier[i][j] + " ");
-        //     }
-        //     System.out.println();
+        // for (int j = 0; j < 5; j++) {
+        // System.out.print(multiplier[i][j] + " ");
+        // }
+        // System.out.println();
         // }
         // System.out.println();
 

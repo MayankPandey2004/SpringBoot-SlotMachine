@@ -75,7 +75,7 @@ public class CalculateWinning {
                 }
                 double temp = mult * tempMatrix[2];
                 tempMatrix[2] = temp;
-                
+
                 winningMatrix.add(tempMatrix);
 
                 if (countWC == 3) {
@@ -83,12 +83,14 @@ public class CalculateWinning {
                     tempMatrix[2] = Math.max(reward, MathData.scores.get("WC")[2] * betAmount);
                 } else {
                     totalWinning += reward;
-                }              
+                }
             }
         }
 
-        if(freeSpin) MathData.freeWin += totalWinning;
-        else MathData.baseWin += totalWinning;
+        if (freeSpin)
+            MathData.freeWin += totalWinning;
+        else
+            MathData.baseWin += totalWinning;
 
         MathData.winningMatrix = winningMatrix;
         MathData.balance += totalWinning;

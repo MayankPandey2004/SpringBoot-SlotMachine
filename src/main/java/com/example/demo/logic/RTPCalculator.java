@@ -18,13 +18,12 @@ public class RTPCalculator {
 
     public void calculate() {
         double totalBets = 0;
-        
+
         for (int i = 1; i <= numberOfSpins; i++) {
-            if(MathData.balance>=MathData.betAmount){
+            if (MathData.balance >= MathData.betAmount) {
                 SpinController.newSpin();
                 totalBets += betAmount;
-            }
-            else{
+            } else {
                 System.out.println(MathData.balance);
                 break;
             }
@@ -37,9 +36,8 @@ public class RTPCalculator {
 
                 DecimalFormat df = new DecimalFormat("#.###");
 
-                String output = 
-                        "Iteration: " + i / 100000000 + "00M\n"
-                        +"Total Bets: " + totalBets/1000000 + "M\n"
+                String output = "Iteration: " + i / 100000000 + "00M\n"
+                        + "Total Bets: " + totalBets / 1000000 + "M\n"
                         + "Base RTP: " + df.format(baseRTP) + "%\n"
                         + "Free RTP: " + df.format(freeRTP) + "%\n"
                         + "Total RTP: " + df.format(totalRTP) + "%\n"
